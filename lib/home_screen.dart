@@ -40,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: POST.length,
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    _nextScreen(POST[index]['user']['username']);
+                    _nextScreen(
+                      POST[index]['urls']['regular'],
+                    );
                   },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),

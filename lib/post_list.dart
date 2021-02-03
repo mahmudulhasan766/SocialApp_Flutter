@@ -68,7 +68,7 @@ class _PostListState extends State<PostList> {
                         )
                       : Image(
                           image: NetworkImage(POST[index]["urls"]["regular"]),
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                         ),
                 ),
               ),

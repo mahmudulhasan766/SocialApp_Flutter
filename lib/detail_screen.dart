@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
-  final String imagePath;
+  String imagePath;
   DetailsScreen({@required this.imagePath});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,6 +11,19 @@ class DetailsScreen extends StatelessWidget {
           image: DecorationImage(
             image: NetworkImage(imagePath),
             fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: RaisedButton(
+            color: Colors.black54,
+            textColor: Colors.white,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'Back to Home',
+              style: TextStyle(fontSize: 20.0),
+            ),
           ),
         ),
       ),
