@@ -24,71 +24,74 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-        child: POST == null
-            ? Center(
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  child: CircularProgressIndicator(),
-                ),
-              )
-            : StaggeredGridView.countBuilder(
-                crossAxisCount: 4,
-                itemCount: POST.length,
-                itemBuilder: (context, index) => InkWell(
-                  onTap: () {
-                    _nextScreen(
-                      POST[index]['urls']['regular'],
-                    );
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(
-                      POST[index]['urls']['regular'],
-                      fit: BoxFit.cover,
+    return Theme(
+      data: ThemeData.light(),
+      child: Scaffold(
+        body: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          child: POST == null
+              ? Center(
+                  child: Container(
+                    width: 30,
+                    height: 30,
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+              : StaggeredGridView.countBuilder(
+                  crossAxisCount: 4,
+                  itemCount: POST.length,
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () {
+                      _nextScreen(
+                        POST[index]['urls']['regular'],
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(
+                        POST[index]['urls']['regular'],
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+                  staggeredTileBuilder: (int i) =>
+                      StaggeredTile.count(2, i.isEven ? 2 : 3),
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
                 ),
-                staggeredTileBuilder: (int i) =>
-                    StaggeredTile.count(2, i.isEven ? 2 : 3),
-                mainAxisSpacing: 8.0,
-                crossAxisSpacing: 8.0,
-              ),
-      ),
+        ),
 
-      //.....................
-      // body: Container(
-      //   color: Colors.yellow,
-      //   child: ListView.builder(
-      //     itemCount: POST.length,
-      //     itemBuilder: (context, index) {
-      //       return Container(child: Text(POST[index]['id']));
-      //     },
-      //   ),
-      //...................
-      // color: Colors.blue,
-      // child: POST != null
-      //     ? StaggeredGridView.countBuilder(
-      //
-      //         crossAxisCount: 4,
-      //         itemCount: POST.length,
-      //         itemBuilder: (BuildContext context, int index) => InkWell(
-      //           onTap: () {
-      //             _nextScreen(POST[index]['id']);
-      //           },
-      //           child: ClipRRect(
-      //             borderRadius: BorderRadius.circular(8.0),
-      //             child: Text(
-      //               POST[index]['id'],
-      //             ),
-      //           ),
-      //         ),
-      //       )
-      //     : Container(),
-      //),
+        //.....................
+        // body: Container(
+        //   color: Colors.yellow,
+        //   child: ListView.builder(
+        //     itemCount: POST.length,
+        //     itemBuilder: (context, index) {
+        //       return Container(child: Text(POST[index]['id']));
+        //     },
+        //   ),
+        //...................
+        // color: Colors.blue,
+        // child: POST != null
+        //     ? StaggeredGridView.countBuilder(
+        //
+        //         crossAxisCount: 4,
+        //         itemCount: POST.length,
+        //         itemBuilder: (BuildContext context, int index) => InkWell(
+        //           onTap: () {
+        //             _nextScreen(POST[index]['id']);
+        //           },
+        //           child: ClipRRect(
+        //             borderRadius: BorderRadius.circular(8.0),
+        //             child: Text(
+        //               POST[index]['id'],
+        //             ),
+        //           ),
+        //         ),
+        //       )
+        //     : Container(),
+        //),
+      ),
     );
   }
 
