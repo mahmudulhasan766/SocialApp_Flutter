@@ -15,16 +15,26 @@ class DetailsScreen extends StatelessWidget {
         ),
         child: Center(
           child: RaisedButton(
-            color: Colors.black54,
-            textColor: Colors.white,
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              "Back home $userName",
-              style: TextStyle(fontSize: 20.0),
-            ),
-          ),
+              color: Colors.black54,
+              textColor: Colors.white,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Container(
+                height: 50,
+                child: Column(
+                  children: [
+                    Text(
+                      "$userName",
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                    Text(
+                      "Back home",
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  ],
+                ),
+              )),
         ),
       ),
     );

@@ -28,9 +28,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            _allimages(
-              POST[index]['urls']['regular'],
-              POST[index]['user']['username'],
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ),
             );
           },
           icon: Icon(FontAwesomeIcons.camera),
@@ -164,12 +166,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   )
                                 : InkWell(
                                     onTap: () {
-                                      _allimages(
-                                        POST[index]['urls']['regular'],
-                                        POST[index]['user']['username'],
-                                      );
-                                      // _nextScreen(
-                                      //     POST[index]["urls"]["regular"]);
+                                      _nextScreen(
+                                          POST[index]["urls"]["regular"]);
                                     },
                                     child: Image(
                                       image: NetworkImage(
@@ -235,26 +233,14 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  _allimages(String imagpath, String usepath) {
+  _nextScreen(String imagePath) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScreen(
-          imagePath: imagpath,
-          userName: usepath,
+        builder: (context) => DetailsScreen(
+          imagePath: imagePath,
         ),
       ),
     );
   }
-
-  // _nextScreen(String imagePath) {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => DetailsScreen(
-  //         imagePath: imagePath,
-  //       ),
-  //     ),
-  //   );
-  // }
 }

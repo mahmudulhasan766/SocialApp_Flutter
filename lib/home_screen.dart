@@ -9,22 +9,19 @@ import 'package:http/http.dart' as http;
 import 'detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  String imagePath;
-  String userName;
-  HomeScreen({@required this.userName, @required this.imagePath});
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List POST = List();
-  // List images;
-  //
-  // @override
-  // void initState() {
-  //   get_data();
-  //   super.initState();
-  // }
+  List POST = List();
+  List images;
+
+  @override
+  void initState() {
+    get_data();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          child: widget.imagePath == null
+          child: POST == null
               ? Center(
                   child: Container(
                     width: 30,
@@ -43,13 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               : StaggeredGridView.countBuilder(
                   crossAxisCount: 4,
-                  itemCount: widget.imagePath.length,
+                  itemCount: POST.length,
                   itemBuilder: (context, index) => InkWell(
                     onTap: () {
                       _nextScreen(
-                        widget.imagePath, widget.userName,
-                        // POST[index]['urls']['regular'],
-                        // POST[index]['user']['username'],
+                        POST[index]['urls']['regular'],
+                        POST[index]['user']['username'],
                       );
                     },
                     child: ClipRRect(
@@ -57,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ImageFiltered(
                         imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
                         child: Image.network(
-                          widget.imagePath,
+                          POST[index]['urls']['regular'],
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -72,22 +68,23 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   //
-  // Future<List> get_data() async {
-  //   final response = await http.get(
-  //       'https://api.unsplash.com/photos/?client_id=HW38Jc7lkWLwczmr_qPz7J5LqMvbAiZal1w7-YNZ-Ac');
-  //
-  //   var data = json.decode(response.body) as List;
-  //   POST.addAll(data);
-  //   print(response.body.toString());
-  //   Change_State();
-  // }
-  //
-  // Change_State() {
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
+  Future<List> get_data() async {
+    final response = await http.get(
+        'https://api.unsplash.com/photos/?client_id=HW38Jc7lkWLwczmr_qPz7J5LqMvbAiZal1w7-YNZ-Ac');
+
+    var data = json.decode(response.body) as List;
+    POST.addAll(data);
+    print(response.body.toString());
+    Change_State();
+  }
+
+  Change_State() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   _nextScreen(String imagePath, String userName) {
     Navigator.push(
