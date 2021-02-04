@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         appBarTheme: AppBarTheme(color: Colors.grey[900]),
       ),
-      home: HomeScreen(),
+      home: MyHomePage(),
     );
   }
 }

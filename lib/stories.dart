@@ -10,16 +10,14 @@ class Stories extends StatelessWidget {
         itemBuilder: (BuildContext contex, int index) {
           return Story();
         },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider();
-        },
-        itemCount: 19,
+        itemCount: 5,
       ),
     );
   }
 }
 
 class Story extends StatelessWidget {
+  //String imagePath, userName;
   int index;
   Story({this.index});
   @override

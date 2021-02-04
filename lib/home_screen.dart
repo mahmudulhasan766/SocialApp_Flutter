@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: ThemeData.light(),
+      data: ThemeData.dark(),
       child: Scaffold(
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       _nextScreen(
                         POST[index]['urls']['regular'],
+                        POST[index]['user']['username'],
                       );
                     },
                     child: ClipRRect(
@@ -60,37 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisSpacing: 8.0,
                 ),
         ),
-
-        //.....................
-        // body: Container(
-        //   color: Colors.yellow,
-        //   child: ListView.builder(
-        //     itemCount: POST.length,
-        //     itemBuilder: (context, index) {
-        //       return Container(child: Text(POST[index]['id']));
-        //     },
-        //   ),
-        //...................
-        // color: Colors.blue,
-        // child: POST != null
-        //     ? StaggeredGridView.countBuilder(
-        //
-        //         crossAxisCount: 4,
-        //         itemCount: POST.length,
-        //         itemBuilder: (BuildContext context, int index) => InkWell(
-        //           onTap: () {
-        //             _nextScreen(POST[index]['id']);
-        //           },
-        //           child: ClipRRect(
-        //             borderRadius: BorderRadius.circular(8.0),
-        //             child: Text(
-        //               POST[index]['id'],
-        //             ),
-        //           ),
-        //         ),
-        //       )
-        //     : Container(),
-        //),
       ),
     );
   }
@@ -111,12 +81,13 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  _nextScreen(String imagePath) {
+  _nextScreen(String imagePath, String userName) {
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => DetailsScreen(
                 imagePath: imagePath,
+                userName: userName,
               )),
     );
   }

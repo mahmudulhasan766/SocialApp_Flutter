@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'detail_screen.dart';
+
 class PostList extends StatefulWidget {
   // int index;
   // PostList({this.index});
@@ -66,9 +68,16 @@ class _PostListState extends State<PostList> {
                             child: CircularProgressIndicator(),
                           ),
                         )
-                      : Image(
-                          image: NetworkImage(POST[index]["urls"]["regular"]),
-                          fit: BoxFit.cover,
+                      : InkWell(
+                          onTap: () {
+                            _nextScreen(
+                              POST[index]['urls']['regular'],
+                            );
+                          },
+                          child: Image(
+                            image: NetworkImage(POST[index]["urls"]["regular"]),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                 ),
               ),
@@ -121,5 +130,15 @@ class _PostListState extends State<PostList> {
     if (mounted) {
       setState(() {});
     }
+  }
+
+  _nextScreen(String imagePath) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => DetailsScreen(
+                imagePath: imagePath,
+              )),
+    );
   }
 }

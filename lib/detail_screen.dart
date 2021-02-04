@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
-  String imagePath;
-  DetailsScreen({@required this.imagePath});
+  String imagePath, userName;
+  DetailsScreen({@required this.imagePath, @required this.userName});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class DetailsScreen extends StatelessWidget {
               Navigator.of(context).pop();
             },
             child: Text(
-              'Back to Home',
+              "Back home $userName",
               style: TextStyle(fontSize: 20.0),
             ),
           ),
