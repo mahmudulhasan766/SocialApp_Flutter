@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -49,9 +50,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
-                      child: Image.network(
-                        POST[index]['urls']['regular'],
-                        fit: BoxFit.cover,
+                      child: ImageFiltered(
+                        imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                        child: Image.network(
+                          POST[index]['urls']['regular'],
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),

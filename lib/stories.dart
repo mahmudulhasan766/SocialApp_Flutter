@@ -7,10 +7,15 @@ class Stories extends StatelessWidget {
       // color: Colors.red,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext contex, int index) {
-          return Story();
+        itemBuilder: (BuildContext context, int index) {
+          return Story(
+            index: index,
+          );
         },
-        itemCount: 5,
+        separatorBuilder: (BuildContext contex, int index) {
+          return Divider();
+        },
+        itemCount: 15,
       ),
     );
   }

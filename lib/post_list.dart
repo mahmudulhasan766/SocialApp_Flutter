@@ -26,10 +26,10 @@ class _PostListState extends State<PostList> {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: POST.length,
-      itemBuilder: (BuildContext context, int index) {
+      separatorBuilder: (BuildContext context, int index) {
         return Divider();
       },
-      separatorBuilder: (BuildContext context, int index) {
+      itemBuilder: (BuildContext context, int index) {
         return Container(
           //color: Colors.red,
           height: MediaQuery.of(context).size.height * .6,
