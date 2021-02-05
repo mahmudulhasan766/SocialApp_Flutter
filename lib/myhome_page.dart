@@ -167,7 +167,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 : InkWell(
                                     onTap: () {
                                       _nextScreen(
-                                          POST[index]["urls"]["regular"]);
+                                        POST[index]["urls"]["regular"],
+                                        POST[index]['user']['username'],
+                                      );
                                     },
                                     child: Image(
                                       image: NetworkImage(
@@ -233,12 +235,13 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  _nextScreen(String imagePath) {
+  _nextScreen(String imagePath, String userPath) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => DetailsScreen(
           imagePath: imagePath,
+          userName: userPath,
         ),
       ),
     );
