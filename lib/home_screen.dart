@@ -19,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List POST = List();
   List images;
+  bool multiple = true;
 
   @override
   void initState() {
@@ -55,9 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             IconButton(
                 icon: Icon(
-                  FontAwesomeIcons.share,
+                  multiple ? Icons.dashboard : Icons.view_agenda,
                 ),
-                onPressed: null)
+                onPressed: () {
+                  setState(() {
+                    multiple = !multiple;
+                  });
+                })
           ],
         ),
         body: Container(
@@ -71,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 )
               : StaggeredGridView.countBuilder(
-                  crossAxisCount: 1,
+                  crossAxisCount: multiple ? 4 : 2,
                   itemCount: POST.length,
                   itemBuilder: (context, index) => InkWell(
                     onTap: () {
@@ -92,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   staggeredTileBuilder: (int i) =>
-                      StaggeredTile.count(1, i.isEven ? 2 : 3),
+                      StaggeredTile.count(2, multiple ? 2 : 3),
                   mainAxisSpacing: 8.0,
                   crossAxisSpacing: 8.0,
                 ),
