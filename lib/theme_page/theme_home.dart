@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_flutter_app/components/z_animation_toggle.dart';
 import 'package:social_flutter_app/models_providers/theme_provider.dart';
+import 'package:social_flutter_app/myhome_page.dart';
 
 class ThemeHome extends StatefulWidget {
   @override
@@ -148,18 +149,24 @@ class _ThemeHomeState extends State<ThemeHome>
                       ),
                       RaisedButton(
                         onPressed: () {
-                          _scaffoldKey.currentState.showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Loved it? Give a star on Github',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Rubik',
-                                  fontSize: width * 0.045,
-                                ),
-                              ),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyHomePage(),
                             ),
                           );
+                          // _scaffoldKey.currentState.showSnackBar(
+                          //   SnackBar(
+                          //     content: Text(
+                          //       'Loved it? Give a star on Github',
+                          //       textAlign: TextAlign.center,
+                          //       style: TextStyle(
+                          //         fontFamily: 'Rubik',
+                          //         fontSize: width * 0.045,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // );
                         },
                         shape: CircleBorder(),
                         color: themeProvider.isLightTheme

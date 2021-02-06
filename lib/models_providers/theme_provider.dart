@@ -29,7 +29,7 @@ class ThemeProvider with ChangeNotifier {
   //use to toggle the theme
   toggleThemeData() async {
     final setting = await Hive.openBox('settings');
-    setting.put('isLighttheme', !isLightTheme);
+    setting.put('isLightTheme', !isLightTheme);
     isLightTheme = !isLightTheme;
     getCurrentStatusNavigationBarColor();
     notifyListeners();
@@ -52,8 +52,11 @@ class ThemeProvider with ChangeNotifier {
   ThemeColor themeModel() {
     return ThemeColor(
       gradient: [
-        if (isLightTheme) ...[Color(0xDDFF0080), Color(0xDDFF8C00)],
-        if (isLightTheme) ...[Color(0xFF8983F7), Color(0xFFA3DAFB)],
+        if (isLightTheme) ...[
+          Color(0xDDFF0080),
+          Color(0xDDFF8C00),
+        ],
+        if (!isLightTheme) ...[Color(0xFF8983F7), Color(0xFFA3DAFB)],
       ],
       textColor: isLightTheme ? Color(0xFF000000) : Color(0xFFFFFFFF),
       toggleButtonColor: isLightTheme ? Color(0xFFFFFFFF) : Color(0xFf34323d),

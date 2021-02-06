@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:social_flutter_app/home_screen.dart';
 
 import 'detail_screen.dart';
+import 'models_providers/theme_provider.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -24,6 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -40,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(
           "Social App",
           style: TextStyle(
-              color: Colors.white,
+              color: themeProvider.themeModel().textColor,
               fontFamily: "Pacifico",
               fontSize: 30,
               fontWeight: FontWeight.w600),
@@ -49,7 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
               icon: Icon(
                 FontAwesomeIcons.share,
-                color: Colors.white,
               ),
               onPressed: null)
         ],
@@ -63,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
+                  //final themeProvider = Provider.of<ThemeProvider>(context);
                   return Column(
                     children: [
                       Stack(
@@ -103,7 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         padding: const EdgeInsets.only(left: 3, right: 3),
                         child: Text(
                           POST[index]['user']['username'],
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                              color: themeProvider.themeModel().textColor),
                         ),
                       ),
                     ],
@@ -143,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Text(
                                   POST[index]['user']['username'],
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: themeProvider.themeModel().textColor,
                                     fontFamily: "Sacramento",
                                     fontSize: 22,
                                     fontWeight: FontWeight.w600,

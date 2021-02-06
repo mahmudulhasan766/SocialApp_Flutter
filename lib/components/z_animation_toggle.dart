@@ -44,9 +44,10 @@ class _ZAnimatedToggleState extends State<ZAnimatedToggle> {
                     child: Text(
                       widget.values[index],
                       style: TextStyle(
-                          fontSize: width * .05,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF918f95)),
+                        fontSize: width * .05,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF918f95),
+                      ),
                     ),
                   ),
                 ),
