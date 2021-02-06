@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 )
               : StaggeredGridView.countBuilder(
-                  crossAxisCount: 4,
+                  crossAxisCount: 1,
                   itemCount: POST.length,
                   itemBuilder: (context, index) => InkWell(
                     onTap: () {
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: ImageFiltered(
-                        imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                        imageFilter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
                         child: Image.network(
                           POST[index]['urls']['regular'],
                           fit: BoxFit.cover,
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   staggeredTileBuilder: (int i) =>
-                      StaggeredTile.count(2, i.isEven ? 2 : 3),
+                      StaggeredTile.count(1, i.isEven ? 2 : 3),
                   mainAxisSpacing: 8.0,
                   crossAxisSpacing: 8.0,
                 ),
