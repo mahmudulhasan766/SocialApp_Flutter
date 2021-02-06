@@ -3,10 +3,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:social_flutter_app/api.dart';
 import 'package:http/http.dart' as http;
 
 import 'detail_screen.dart';
+import 'models_providers/theme_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -25,9 +28,38 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Theme(
       data: ThemeData.dark(),
       child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
+            },
+            icon: Icon(FontAwesomeIcons.camera),
+          ),
+          title: Text(
+            "Social App",
+            style: TextStyle(
+                color: themeProvider.themeModel().textColor,
+                fontFamily: "Pacifico",
+                fontSize: 30,
+                fontWeight: FontWeight.w600),
+          ),
+          actions: [
+            IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.share,
+                ),
+                onPressed: null)
+          ],
+        ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: POST == null
