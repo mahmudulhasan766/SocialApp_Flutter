@@ -30,78 +30,75 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    return Theme(
-      data: ThemeData.dark(),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ),
-              );
-            },
-            icon: Icon(FontAwesomeIcons.camera),
-          ),
-          title: Text(
-            "Social App",
-            style: TextStyle(
-                color: themeProvider.themeModel().textColor,
-                fontFamily: "Pacifico",
-                fontSize: 30,
-                fontWeight: FontWeight.w600),
-          ),
-          actions: [
-            IconButton(
-                icon: Icon(
-                  multiple ? Icons.dashboard : Icons.view_agenda,
-                ),
-                onPressed: () {
-                  setState(() {
-                    multiple = !multiple;
-                  });
-                })
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ),
+            );
+          },
+          icon: Icon(FontAwesomeIcons.camera),
         ),
-        body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          child: POST == null
-              ? Center(
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    child: CircularProgressIndicator(),
-                  ),
-                )
-              : StaggeredGridView.countBuilder(
-                  crossAxisCount: multiple ? 4 : 2,
-                  itemCount: POST.length,
-                  itemBuilder: (context, index) => InkWell(
-                    onTap: () {
-                      _nextScreen(
+        title: Text(
+          "Social App",
+          style: TextStyle(
+              color: themeProvider.themeModel().textColor,
+              fontFamily: "Pacifico",
+              fontSize: 30,
+              fontWeight: FontWeight.w600),
+        ),
+        actions: [
+          IconButton(
+              icon: Icon(
+                multiple ? Icons.dashboard : Icons.view_agenda,
+              ),
+              onPressed: () {
+                setState(() {
+                  multiple = !multiple;
+                });
+              })
+        ],
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+        child: POST == null
+            ? Center(
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : StaggeredGridView.countBuilder(
+                crossAxisCount: multiple ? 4 : 2,
+                itemCount: POST.length,
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    _nextScreen(
+                      POST[index]['urls']['regular'],
+                      POST[index]['user']['username'],
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: ImageFiltered(
+                      imageFilter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
+                      child: Image.network(
                         POST[index]['urls']['regular'],
-                        POST[index]['user']['username'],
-                      );
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: ImageFiltered(
-                        imageFilter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
-                        child: Image.network(
-                          POST[index]['urls']['regular'],
-                          fit: BoxFit.cover,
-                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  staggeredTileBuilder: (int i) =>
-                      StaggeredTile.count(2, multiple ? 2 : 3),
-                  mainAxisSpacing: 8.0,
-                  crossAxisSpacing: 8.0,
                 ),
-        ),
+                staggeredTileBuilder: (int i) =>
+                    StaggeredTile.count(2, i.isEven ? 2 : 3),
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
+              ),
       ),
     );
   }
